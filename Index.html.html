@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="theme-color" content="#0a4d3c">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>৯ম পে স্কেল ২০২৬ – বেতন ক্যালকুলেটর</title>
+<style>
+:root{--g:#0a4d3c;--g2:#0f6b52;--red:#d6203a;--ink:#14211c;--mut:#5b6b64;--line:#dbe5e0;--bg:#edf3f0;--card:#fff;--soft:#e4f0ea;--err:#a4262c;--r:14px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Noto Sans Bengali","Hind Siliguri","Kalpurush","SolaimanLipi","Nirmala UI","Vrinda","Segoe UI",sans-serif}
+.hero{background:var(--g);color:#fff;padding:30px 16px 54px}
+.hero .in{max-width:860px;margin:0 auto}
+h1{margin:0;font-size:clamp(1.4rem,4.6vw,1.95rem);line-height:1.35;font-weight:700}
+h1::before{content:"";display:inline-block;width:.62em;height:.62em;border-radius:50%;background:var(--red);margin-right:.5em;vertical-align:.02em}
+.hero p{margin:8px 0 0;color:rgba(255,255,255,.82);font-size:.94rem}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px}
+.tabs{display:flex;gap:4px;padding:5px;margin:-28px 0 16px;background:#fff;border:1px solid var(--line);border-radius:999px;box-shadow:0 10px 28px -14px rgba(10,60,45,.35);position:relative}
+.tabs button{flex:1;padding:12px 10px;font:inherit;font-weight:600;font-size:.96rem;border:0;background:transparent;color:var(--g);border-radius:999px;cursor:pointer;transition:background .2s,color .2s}
+.tabs button:hover{background:var(--soft)}
+.tabs button[aria-selected=true]{background:var(--g);color:#fff}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid #f0a500;outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;margin-bottom:16px;box-shadow:0 1px 2px rgba(10,60,45,.06),0 12px 28px -18px rgba(10,60,45,.28)}
+.card h2{margin:0 0 14px;font-size:1.08rem;font-weight:700;color:var(--g)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.card{padding:16px}}
+label.f,.f{display:block;font-size:.92rem;font-weight:600}
+select,input[type=text]{width:100%;min-height:48px;margin-top:6px;padding:11px 14px;font:inherit;font-weight:500;border:1.5px solid #b4c5bd;border-radius:10px;background:#fff;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+select{appearance:none;-webkit-appearance:none;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M3 6l5 5 5-5' fill='none' stroke='%230a4d3c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+select:hover,input[type=text]:hover{border-color:var(--g2)}
+select:focus,input[type=text]:focus{border-color:var(--g);box-shadow:0 0 0 4px rgba(15,107,82,.16);outline:none}
+.hint{display:block;font-size:.82rem;color:var(--mut);margin:6px 0 0;font-weight:400;line-height:1.5}
+p.hint{margin-top:12px}
+.r,.c{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;margin:8px 0 0;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;cursor:pointer;background:#fff;line-height:1.5;transition:border-color .15s,background .15s}
+.r:hover,.c:hover{border-color:#9fbbb0}
+.r:has(input:checked),.c:has(input:checked){border-color:var(--g2);background:var(--soft)}
+.r input,.c input{margin:3px 0 0;accent-color:var(--g);width:18px;height:18px;flex:none}
+div.f+.r{margin-top:6px}
+details{margin-top:16px;border-top:1px dashed #c3d3cb;padding-top:12px}
+summary{cursor:pointer;font-weight:700;color:var(--g);list-style:none;display:flex;align-items:center;gap:8px}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"›";display:inline-block;font-size:1.4rem;line-height:1;transition:transform .2s}
+details[open] summary::before{transform:rotate(90deg)}
+.err{background:#fdecea;color:var(--err);border:1px solid #f1b7b3;border-left:5px solid var(--err);padding:12px 14px;border-radius:10px;margin-bottom:16px;font-weight:600}
+dl.kv{margin:0 0 18px;display:grid;grid-template-columns:auto 1fr;gap:8px 16px;font-size:.92rem;background:#f4f9f6;border:1px solid var(--line);border-left:4px solid var(--g2);border-radius:10px;padding:14px 16px}
+dl.kv dt{color:var(--mut)}
+dl.kv dd{margin:0;font-weight:600}
+table{width:100%;border-collapse:collapse}
+th,td{padding:12px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{font-size:.8rem;color:var(--mut);font-weight:600;border-bottom:2px solid #c7d8d0}
+td.a,th.a{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;font-weight:700}
+th.a{font-weight:600}
+td.n{font-size:.84rem;color:var(--mut)}
+tr.base td{background:var(--soft);font-weight:700;color:var(--g);border-bottom-color:transparent}
+tr.base td:first-child{border-radius:10px 0 0 10px}
+tr.base td:last-child{border-radius:0 10px 10px 0}
+tr.base td.n{color:var(--mut);font-weight:500}
+tr.na td{color:#96a49d}
+tr.na td.a{font-weight:500}
+tbody tr:last-child td{border-bottom:0}
+.total{position:relative;overflow:hidden;background:var(--g);color:#fff;border-radius:12px;padding:20px 22px;display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:16px;flex-wrap:wrap}
+.total::after{content:"";position:absolute;right:-34px;top:50%;width:120px;height:120px;margin-top:-60px;border-radius:50%;background:var(--red)}
+.total span,.total strong{position:relative;z-index:1}
+.total span{font-size:1rem;font-weight:600;opacity:.92}
+.total strong{font-size:clamp(1.8rem,7vw,2.3rem);line-height:1.2;padding-right:44px}
+.note{font-size:.86rem;color:var(--mut);margin:14px 0 0;padding-left:12px;border-left:3px solid #c3d3cb}
+.note b{color:var(--ink)}
+.ph th,.ph td{font-size:.92rem}
+footer{font-size:.8rem;color:var(--mut);padding:8px 0 40px}
+footer ul{margin:0;padding-left:18px}
+footer li{margin-bottom:6px}
+.sc{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;padding:0 4px}
+.cmp{min-width:560px}
+.cmp th,.cmp td{font-size:.9rem}
+.cmp th.a{white-space:normal;min-width:118px;line-height:1.4}
+.cmp th:last-child{color:var(--g)}
+.cmp .sub{font-weight:500;color:var(--mut);font-size:.78rem}
+.cmp td:first-child,.cmp th:first-child{position:sticky;left:0;background:#fff;z-index:1}
+.cmp tr.base td:first-child{background:var(--soft)}
+.cmp tr.sum td{background:var(--g);color:#fff;font-weight:800;border-bottom:0;font-size:.98rem}
+.cmp tr.sum td:first-child{background:var(--g);border-radius:10px 0 0 10px}
+.cmp tr.sum td:last-child{border-radius:0 10px 10px 0}
+.cmp tbody tr.sum td{padding:14px 8px}
+.pair{display:flex;gap:10px}
+.pair .r{flex:1;margin-top:6px}
+.gpf{margin-top:18px;padding-top:16px;border-top:1px dashed #c3d3cb}
+.gh{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.gh .c{margin:0;padding:6px 10px;font-size:.78rem;font-weight:700;color:var(--mut);letter-spacing:.02em}
+.sl{display:flex;justify-content:space-between;align-items:baseline;font-size:.86rem;color:var(--mut);margin-top:12px}
+.sl b{color:var(--g);font-size:1.3rem}
+input[type=range]{width:100%;height:30px;accent-color:var(--g);margin:2px 0 0;cursor:pointer}
+.ded{margin-top:22px;background:#f8faf9;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.ded h3{margin:0 0 4px;font-size:1rem;font-weight:700}
+.dt td.a{color:var(--red)}
+.dt tr.dsum td{font-weight:800;border-top:2px solid #c7d8d0;border-bottom:0}
+.net{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-top:14px;padding:16px 20px;border:2px solid var(--g);border-radius:12px;color:var(--g);background:#fff}
+.net span{font-weight:700}
+.net strong{font-size:clamp(1.5rem,6vw,1.95rem);line-height:1.25}
+.ratio{margin-top:22px}
+.rh{font-weight:700;color:var(--mut);font-size:.9rem;margin-bottom:8px}
+.bar{height:14px;border-radius:999px;overflow:hidden;background:#1ea7e1}
+.bar i{display:block;height:100%;background:var(--g2)}
+.lg{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:.88rem}
+.lg s{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:7px;vertical-align:-1px;text-decoration:none}
+.d1{background:var(--g2)}.d2{background:#1ea7e1}.d3{background:var(--red)}
+.cmp tr.dedrow td{border-bottom:0;padding:14px 8px 4px;vertical-align:top}
+.cmp tr.dedrow td.a{color:var(--red);font-weight:700}
+.cmp tr.netrow td{border-bottom:0;padding:4px 8px 14px;color:var(--g);font-weight:800;font-size:1.02rem}
+.dlrow{display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:0 0 16px}
+.pdfbtn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;font:inherit;font-weight:700;color:#fff;background:var(--g);border:0;border-radius:999px;cursor:pointer;box-shadow:0 10px 22px -12px rgba(10,77,60,.7);transition:background .2s,transform .1s}
+.pdfbtn:hover{background:var(--g2)}
+.pdfbtn:active{transform:translateY(1px)}
+.only-print{display:none}
+.ptitle{font-size:1.3rem;color:var(--g);margin:0 0 4px}
+.ptitle::before{display:none}
+@media print{
+ body{background:#fff;font-size:14px}
+ .hero,.tabs,#pBase,#pNew,#pOld,footer,.dlrow,#err,details{display:none!important}
+ .only-print{display:block!important;margin-bottom:12px}
+ .wrap{max-width:none;padding:0}
+ .card{box-shadow:none;border:0;padding:0;margin:0}
+ *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .sc{overflow:visible;margin:0;padding:0}
+ .cmp{min-width:0}
+ .cmp td:first-child,.cmp th:first-child{position:static}
+ tr,.ded,.net,.ratio,.total{break-inside:avoid}
+}
+[hidden]{display:none!important}
+@media(max-width:600px){
+ table:not(.ph) thead{display:none}
+ table:not(.ph) tr{display:grid;grid-template-columns:1fr auto;column-gap:12px;padding:11px 0;border-bottom:1px solid var(--line)}
+ table:not(.ph) tbody tr:last-child{border-bottom:0}
+ table:not(.ph) td{border:0!important;padding:0;background:transparent!important;border-radius:0!important}
+ table:not(.ph) td:nth-child(1){grid-column:1;grid-row:1;font-weight:600}
+ table:not(.ph) td:nth-child(3){grid-column:2;grid-row:1}
+ table:not(.ph) td:nth-child(2){grid-column:1/-1;grid-row:2}
+ table:not(.ph) tr.base{background:var(--soft);padding:11px 12px;border-radius:10px;border-bottom:0}
+ .total{padding:18px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hero"><div class="in"><h1>৯ম জাতীয় পে স্কেল ২০২৬ – বেতন ক্যালকুলেটর</h1><p>চাকরি (বেতন ও ভাতাদি) আদেশ, ২০২৬ (এস.আর.ও. নং ৩৪৭-আইন/২০২৬) অনুযায়ী</p></div></header>
+<div class="wrap">
+
+<div class="tabs" role="tablist">
+  <button role="tab" id="tNew" aria-selected="true">নতুন কর্মচারী</button>
+  <button role="tab" id="tOld" aria-selected="false">পুরানো কর্মচারী (পে ফিক্সেশন)</button>
+</div>
+
+<section class="card" id="pBase">
+  <h2>প্রাথমিক তথ্য</h2>
+  <div class="f">লিঙ্গ</div>
+  <div class="pair">
+    <label class="r"><input type="radio" name="sex" value="m" checked>পুরুষ</label>
+    <label class="r"><input type="radio" name="sex" value="f">নারী</label>
+  </div>
+  <div class="gpf">
+    <div class="gh"><div class="f">প্রভিডেন্ট ফান্ড (জিপিএফ) মাসিক জমার হার (%)</div>
+      <label class="c"><input type="checkbox" id="gpfman">ম্যানুয়াল টাকা</label></div>
+    <div id="gpfs">
+      <div class="sl"><span>৮.৩৩%</span><b id="gpfv">১০%</b><span>৩০%</span></div>
+      <input type="range" id="gpfr" min="0" max="22" step="1" value="2" aria-label="জিপিএফ হার">
+      <span class="hint">* ন্যূনতম ৮.৩৩% চাঁদা আবশ্যক। জিপিএফ মূল বেতনের এই শতাংশ হারে কাটা হবে।</span>
+    </div>
+    <div id="gpfmw" hidden>
+      <label class="f">মাসিক জিপিএফ কর্তনের অঙ্ক (টাকা)
+        <input type="text" id="gpfm" inputmode="numeric" autocomplete="off" placeholder="যেমন: ৫০০০"></label>
+    </div>
+  </div>
+</section>
+
+<section class="card" id="pNew">
+  <h2>গ্রেড নির্বাচন করুন</h2>
+  <div class="grid">
+    <label class="f">বেতন গ্রেড<select id="ng"></select></label>
+    <label class="f">স্কেলের ধাপ<select id="ns"></select>
+      <span class="hint">নতুন নিয়োগে সাধারণত প্রারম্ভিক ধাপ। অগ্রিম বেতনবৃদ্ধি প্রযোজ্য হলে পরবর্তী ধাপ বাছুন।</span></label>
+  </div>
+</section>
+
+<section class="card" id="pOld" hidden>
+  <h2>বর্তমান (২০১৫ স্কেল) তথ্য দিন</h2>
+  <div class="grid">
+    <label class="f">২০১৫ স্কেলে আপনার গ্রেড<select id="og"></select></label>
+    <label class="f">৩০ জুন ২০২৬ তারিখের মূল বেতন (টাকা) – ধাপ থেকে বাছুন
+      <select id="cs"></select>
+      <span class="hint" id="oh"></span></label>
+    <label class="f">অথবা নিজে টাকার অঙ্ক লিখুন
+      <input type="text" id="cur" inputmode="numeric" autocomplete="off">
+      <span class="hint">যেমন: ১৩৭৯০। ড্রপডাউন থেকে ধাপ বাছলে এখানে আপনাআপনি বসে যায়; এখানে লিখলে মিল থাকা ধাপ ড্রপডাউনে নির্বাচিত হয়, না মিললে "কাস্টম" দেখায়।</span></label>
+  </div>
+  <label class="c" style="margin-top:10px"><input type="checkbox" id="inc" checked>১ জুলাই ২০২৬ তারিখের একটি বার্ষিক বেতনবৃদ্ধি (অনুচ্ছেদ ৯) যোগ করুন</label>
+  <p class="hint">একই মূল বেতন একাধিক গ্রেডে থাকতে পারে, তাই গ্রেড নির্বাচন প্রয়োজন।</p>
+</section>
+
+<section class="card">
+  <h2>ভাতার তথ্য</h2>
+  <div class="grid">
+    <div>
+      <div class="f">কর্মস্থল (বাড়ি ভাড়া ভাতার জন্য)</div>
+      <label class="r"><input type="radio" name="loc" value="0" checked>ঢাকা উত্তর ও দক্ষিণ সিটি কর্পোরেশন</label>
+      <label class="r"><input type="radio" name="loc" value="1">খুলনা, রাজশাহী, চট্টগ্রাম, সিলেট, বরিশাল, নারায়ণগঞ্জ, কুমিল্লা, রংপুর, গাজীপুর, ময়মনসিংহ, বগুড়া সিটি কর্পোরেশন এবং সাভার ও কক্সবাজার পৌর এলাকা</label>
+      <label class="r"><input type="radio" name="loc" value="2">অন্যান্য স্থান</label>
+    </div>
+    <div>
+      <label class="f">বয়স (চিকিৎসা ভাতার জন্য)<select id="age"><option value="0">৫০ বছর পর্যন্ত</option><option value="1">৫০ বছর ১ দিন থেকে পিআরএল পর্যন্ত</option></select></label>
+      <label class="f" style="margin-top:10px">সন্তান সংখ্যা (শিক্ষা সহায়ক ভাতা)<select id="kids"><option value="0">নেই</option><option value="1">১ জন</option><option value="2" selected>২ বা তার বেশি</option></select></label>
+      <label class="c"><input type="checkbox" id="city" checked>কর্মস্থল সিটি কর্পোরেশন এলাকায় (যাতায়াত ভাতা)</label>
+    </div>
+  </div>
+  <details>
+    <summary>অন্যান্য ভাতা (প্রযোজ্য হলে)</summary>
+    <div class="grid" style="margin-top:8px">
+      <div>
+        <label class="f">এলাকাভিত্তিক ভাতা<select id="area"><option value="0">প্রযোজ্য নয়</option><option value="1">পাহাড়ি ভাতা – পার্বত্য জেলা সদর ও সদর উপজেলা</option><option value="2">পাহাড়ি ভাতা – অন্যান্য উপজেলা</option><option value="3">হাওড়/দ্বীপ/চর ভাতা</option></select></label>
+        <label class="f" style="margin-top:10px">বিশেষ চাহিদাসম্পন্ন (প্রতিবন্ধী) সন্তান<select id="dis"><option value="0">নেই</option><option value="1">১ জন</option><option value="2">২ জন</option></select></label>
+      </div>
+      <div>
+        <label class="c"><input type="checkbox" id="dhoa">ধোলাই ভাতা</label>
+        <label class="c"><input type="checkbox" id="charge">কার্যভার ভাতা (চলতি/অতিরিক্ত দায়িত্ব)</label>
+        <label class="c"><input type="checkbox" id="train">প্রশিক্ষণ প্রতিষ্ঠানে প্রেষণ ভাতা (৯ম গ্রেড ও তদূর্ধ্ব)</label>
+      </div>
+    </div>
+  </details>
+</section>
+
+<div class="only-print"><h1 class="ptitle">৯ম জাতীয় পে স্কেল ২০২৬ – বেতন হিসাব</h1><p id="psum" class="hint"></p></div>
+<div id="err" class="err" hidden></div>
+<section class="card" id="out" aria-live="polite"></section>
+<div class="dlrow" id="dlrow">
+  <button type="button" id="pdf" class="pdfbtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0l-5-5m5 5l5-5M5 21h14"/></svg>পুরো হিসাব পিডিএফ ডাউনলোড করুন</button>
+  <span class="hint">খুলে যাওয়া প্রিন্ট উইন্ডোতে গন্তব্য হিসেবে "PDF হিসেবে সংরক্ষণ (Save as PDF)" বেছে নিন।</span>
+</div>
+
+<footer>
+  <ul>
+    <li>গেজেটের অনুচ্ছেদ ১(৩)(ঞ) ও ১৫(১) অনুযায়ী ভাতাদি ১ জানুয়ারি ২০২৮ থেকে এই নতুন হারে প্রযোজ্য; তার আগে ৩০ জুন ২০২৬-এর প্রাপ্য অঙ্কে চলবে। এখানে পূর্ণ (নতুন হারের) কাঠামো দেখানো হয়েছে।</li>
+    <li>উৎসব ভাতা, ভ্রমণ ভাতা, ঝুঁকি ভাতা, আপ্যায়ন ভাতা এবং মন্ত্রিপরিষদ সচিব/সিনিয়র সচিবের নির্ধারিত বেতন এই ক্যালকুলেটরে অন্তর্ভুক্ত নয়।</li>
+    <li>এটি একটি সহায়ক হিসাব। চূড়ান্ত বেতন নির্ধারণ iBAS++ সিস্টেমের Pay Fixation অপশনে বা অর্থ বিভাগের নির্দেশনা অনুযায়ী হবে।</li>
+  </ul>
+</footer>
+</div>
+
+<script>
+const D = {"old":{"1":[78000],"2":[66000,68440,71050,73720,76490],"3":[56500,58760,61120,63570,66120,68770,71530,74400],"4":[50000,52000,54080,56240,58500,60840,63280,65420,68460,71200],"5":[43000,44940,46970,49090,51300,53610,56030,58560,61200,63960,66840,69850],"6":[35500,37280,39150,41110,43170,45330,47600,49980,52480,55110,57870,60770,63810,67010],"7":[29000,30450,31980,33580,35260,37030,38890,40840,42990,45040,47300,49670,52160,54770,57510,60390,63410],"8":[23000,24150,25360,26630,27970,29370,30840,32390,34010,35720,37510,39390,41360,43430,45610,47900,50300,52820,55470],"9":[22000,23100,24260,25440,26760,28100,29510,30990,32540,34170,35880,37640,39570,41550,43630,45820,48120,50530,53060],"10":[16000,16800,17640,18530,19460,20440,21490,22550,23680,24870,26120,27430,28810,30260,31780,33370,35040,36800,38640],"11":[12500,13130,13790,14480,15210,15980,16780,17620,18510,19440,20420,21450,22530,23660,24850,26100,27410,28790,30230],"12":[11300,11870,12470,13100,13760,14450,15180,15940,16740,17580,18460,19390,20360,21340,22450,23580,24760,26000,27300],"13":[11000,11550,12130,12740,13380,14050,14760,15500,16280,17100,17960,18860,19810,20810,21460,22960,24110,25320,26590],"14":[10200,10710,11250,11820,12420,13050,13710,14400,15120,15880,16680,17520,18400,19320,20290,21310,22380,23500,24680],"15":[9700,10190,10700,11240,11810,12410,13040,13700,14390,15110,15870,16670,17510,18390,19310,20280,21300,22370,23490],"16":[9300,9770,10260,10780,11320,11890,12490,13120,13780,14470,15200,15960,16760,17600,18460,19410,20390,21410,22490],"17":[9000,9450,9930,10430,10960,11510,12090,12700,13340,14010,14720,15460,16240,17060,17920,18820,19770,20760,21800],"18":[8800,9240,9710,10200,10710,11250,11820,12420,13050,13710,14400,15120,15880,16680,17520,18400,19320,20290,21310],"19":[8500,8930,9380,9850,10350,10870,11420,12000,12600,13230,13900,14600,15330,16100,16910,17760,18650,19590,20570],"20":[8250,8670,9110,9570,10050,10560,11090,11650,12240,12860,13510,14190,14900,15650,16440,17270,18140,19050,20010]},"neu":{"1":[156000],"2":[132000,135700,139400,143200,147200,151200,153000],"3":[113000,117000,121100,125300,129700,134300,139000,143600,148800],"4":[100000,103500,107200,110900,114800,118800,123000,127300,131700,136300,142400],"5":[86000,89900,93900,96800,100700,104700,108900,113200,117700,122500,127400,132400,139700],"6":[71000,74600,78300,82200,86400,90700,95200,100000,104900,110200,115700,121500,127600,134000],"7":[58000,60900,64000,67200,70500,74100,77800,81700,85700,90000,94500,99200,104200,109400,114900,120600,126800],"8":[46000,48300,50800,53300,56000,58800,61700,64800,68000,71400,75000,78700,82700,86800,91100,95700,100500,105500,110800],"9":[44000,46200,48600,51000,53500,56200,59000,62000,65100,68300,71700,75300,79100,83000,87200,91500,96100,100900,105900],"10":[32000,33600,35300,37100,38900,40900,42900,45100,47300,49700,52200,54800,57500,60400,63400,66600,69900,73400,77300],"11":[25000,26300,27600,29000,30400,32000,33600,35200,37000,38800,40800,42800,44900,47200,49500,52000,54800,57300,60500],"12":[24300,25600,26800,28200,29600,31100,32600,34200,36000,37700,39600,41600,43700,45900,48200,50600,53100,55700,58700],"13":[24000,25200,26500,27800,29200,30700,32200,33800,35500,37300,39100,41100,43200,45300,47600,49900,52400,55100,58000],"14":[23500,24700,26000,27300,28600,30000,31500,33100,34800,36500,38300,40200,42300,44400,46600,48900,51300,53900,56800],"15":[22800,24000,25200,26400,27800,29100,30600,32100,33700,35400,37200,39000,41000,43000,45200,47400,49800,52300,55200],"16":[21900,23000,24200,25400,26700,28000,29400,30900,32400,34000,35700,37500,39400,41300,43400,45600,47900,50200,52900],"17":[21400,22500,23600,24800,26100,27400,28700,30200,31700,33200,34900,36700,38500,40400,42400,44500,46800,49100,51900],"18":[21000,22100,23200,24400,25600,26900,28200,29600,31100,32600,34300,36000,37600,39600,41600,43700,45900,48200,50900],"19":[20500,21600,22700,23800,25000,26200,27500,28900,30300,31900,33400,35100,36900,38700,40600,42700,44800,47000,49600],"20":[20000,21000,22100,23200,24400,25600,26900,28200,29600,31100,32600,34000,36000,37800,39600,41600,43700,45900,48400]}};
+const $ = id => document.getElementById(id);
+const DIG = '০১২৩৪৫৬৭৮৯';
+const num = s => parseInt(String(s).replace(/[০-৯]/g, d => DIG.indexOf(d)).replace(/[^\d]/g, ''), 10);
+const bn = n => Math.round(n).toLocaleString('bn-BD');
+const tk = n => '৳ ' + bn(n);
+const ord = g => bn(g) + (g == 1 ? 'ম' : g < 4 ? 'য়' : g == 4 ? 'র্থ' : g <= 10 ? 'ম' : 'তম');
+const range = a => a.length > 1 ? bn(a[0]) + ' – ' + bn(a[a.length - 1]) : bn(a[0]) + ' (নির্ধারিত)';
+const HRA = [[60, 50, 45], [50, 40, 35], [45, 35, 30], [40, 30, 25]];
+let mode = 'new';
+
+function opts() {
+  return { loc: +document.querySelector('[name=loc]:checked').value, old50: $('age').value == '1',
+    kids: +$('kids').value, city: $('city').checked, dis: +$('dis').value, dhoa: $('dhoa').checked,
+    charge: $('charge').checked, train: $('train').checked, area: +$('area').value,
+    sex: document.querySelector('[name=sex]:checked').value, gm: $('gpfman').checked, gp: gpfPct(), ga: num($('gpfm').value) || 0 };
+}
+
+const pf = n => n.toLocaleString('bn-BD');
+const gpfPct = () => { const v = +$('gpfr').value; return v == 0 ? 8.33 : 8 + v; };
+function syncGpf() {
+  const m = $('gpfman').checked;
+  $('gpfs').hidden = m; $('gpfmw').hidden = !m;
+  $('gpfv').textContent = pf(gpfPct()) + '%';
+}
+const SLAB = [[300000, 10], [400000, 15], [500000, 20], [2000000, 25], [Infinity, 30]];
+function tax(b, sex) {
+  const inc = b * 12 + b * 2 + b * 0.15, ex = sex == 'f' ? 450000 : 400000;
+  let rem = inc - ex, t = 0;
+  for (const [w, p] of SLAB) { if (rem <= 0) break; const x = Math.min(rem, w); t += x * p / 100; rem -= x; }
+  return { t: t / 12, inc, ex };
+}
+function deduct(b, o) {
+  const tx = tax(b, o.sex), gp = o.gm ? o.ga : b * o.gp / 100;
+  return [
+    { n: 'জিপিএফ কর্তন', a: Math.round(gp), note: o.gm ? 'ম্যানুয়াল অঙ্ক' : 'মূল বেতনের ' + pf(o.gp) + '%' },
+    { n: 'অগ্রিম আয়কর কর্তন (' + (o.sex == 'f' ? 'নারী' : 'পুরুষ') + ')', a: Math.round(tx.t),
+      note: 'বার্ষিক আয় ' + tk(tx.inc) + ' (মূল বেতন ×১২ + ২ ঈদ ভাতা + নববর্ষ ভাতা); ' + (tx.t ? 'করমুক্ত সীমা ' : 'সীমার মধ্যে, করমুক্ত সীমা ') + tk(tx.ex) },
+    { n: 'কল্যাণ তহবিল ও গোষ্ঠী বিমা', a: 250, note: 'সকল গ্রেড' },
+    { n: 'রেভিনিউ স্ট্যাম্প', a: 10, note: 'সকল গ্রেড' }
+  ];
+}
+
+function rows(g, b, o) {
+  const r = [];
+  const add = (n, a, note, opt) => { if (opt && !a) return; r.push({ n, a: Math.round(a), note }); };
+  const h = HRA[g >= 16 ? 0 : g >= 10 ? 1 : g >= 5 ? 2 : 3][o.loc];
+  add('মূল বেতন', b, 'জাতীয় বেতনস্কেল, ২০২৬');
+  add('বাড়ি ভাড়া ভাতা', b * h / 100, 'মূল বেতনের ' + bn(h) + '%');
+  add('চিকিৎসা ভাতা', o.old50 ? 4000 : 3000, o.old50 ? '৫০ বছর ১ দিন থেকে পিআরএল পর্যন্ত' : '৫০ বছর বয়স পর্যন্ত');
+  const tr = g >= 11 && o.city ? 600 : 0;
+  add('যাতায়াত ভাতা', tr, tr ? '১১তম–২০তম গ্রেড, সিটি কর্পোরেশন এলাকা' : 'প্রযোজ্য নয়');
+  add('মোবাইল ভাতা', g <= 5 ? 500 : 150, g <= 5 ? '৫ম গ্রেড ও তদূর্ধ্ব' : '৬ষ্ঠ–২০তম গ্রেড');
+  add('টিফিন ভাতা', g >= 11 ? 500 : 0, g >= 11 ? '১১তম–২০তম গ্রেড' : 'প্রযোজ্য নয়');
+  add('শিক্ষা সহায়ক ভাতা', o.kids * 500, o.kids ? 'সন্তান প্রতি ৫০০ (সর্বোচ্চ ১,০০০)' : 'সন্তান নেই');
+  add('প্রতিবন্ধী সন্তান ভাতা', o.dis * 3000, 'জনপ্রতি ৩,০০০ (সর্বোচ্চ ২ সন্তান)', 1);
+  add('ধোলাই ভাতা', o.dhoa ? 300 : 0, 'মাসিক ৩০০', 1);
+  add('কার্যভার ভাতা', o.charge ? 1500 : 0, 'মাসিক ১,৫০০', 1);
+  if (o.area == 1) add('পাহাড়ি ভাতা', Math.min(b * .2, 5000), 'মূল বেতনের ২০%, সর্বোচ্চ ৫,০০০', 1);
+  if (o.area == 2) add('পাহাড়ি ভাতা', Math.min(b * .2, 5500), 'মূল বেতনের ২০%, সর্বোচ্চ ৫,৫০০', 1);
+  if (o.area == 3) add('হাওড়/দ্বীপ/চর ভাতা', Math.min(b * .2, 5000), 'মূল বেতনের ২০%, সর্বোচ্চ ৫,০০০', 1);
+  if (o.train && g <= 9) add('প্রশিক্ষণ প্রেষণ ভাতা', b * .1, 'মূল বেতনের ১০%', 1);
+  return r;
+}
+
+function render(g, b, kv, extra) {
+  const o = opts(), r = rows(g, b, o);
+  const total = r.reduce((s, x) => s + x.a, 0);
+  const dd = deduct(b, o), dsum = dd.reduce((s, x) => s + x.a, 0);
+  let h = '<dl class="kv">' + kv.map(x => '<dt>' + x[0] + '</dt><dd>' + x[1] + '</dd>').join('') + '</dl>';
+  h += '<table><thead><tr><th>খাত</th><th>হার / বিবরণ</th><th class="a">মাসিক পরিমাণ</th></tr></thead><tbody>';
+  r.forEach((x, i) => {
+    h += '<tr class="' + (i == 0 ? 'base' : x.a ? '' : 'na') + '"><td>' + x.n + '</td><td class="n">' + x.note +
+      '</td><td class="a">' + (x.a ? tk(x.a) : '—') + '</td></tr>';
+  });
+  h += '</tbody></table><div class="total"><span>মোট মাসিক বেতন</span><strong>' + tk(total) + '</strong></div>';
+  h += '<div class="ded"><h3>বেতন হতে কর্তনসমূহ (Deductions)</h3><table class="dt"><thead><tr><th>খাত</th><th>হার / বিবরণ</th><th class="a">টাকা</th></tr></thead><tbody>';
+  dd.forEach(x => { h += '<tr><td>' + x.n + '</td><td class="n">' + x.note + '</td><td class="a">- ' + tk(x.a) + '</td></tr>'; });
+  h += '<tr class="dsum"><td>মোট মাসিক কর্তন</td><td></td><td class="a">- ' + tk(dsum) + '</td></tr></tbody></table></div>';
+  h += '<div class="net"><span>নীট মাসিক প্রাপ্য বেতন <small style="font-weight:500;color:var(--mut)">(মোট বেতন − মোট কর্তন)</small></span><strong>' + tk(total - dsum) + '</strong></div>';
+  const bp = b / total * 100, dp = dsum / total * 100, pc = x => pf(Math.round(x * 10) / 10);
+  h += '<div class="ratio"><div class="rh">বেতন কাঠামোর অনুপাত চিত্র</div><div class="bar"><i style="width:' + bp + '%"></i></div><div class="lg">' +
+    '<span><s class="d1"></s>মূল বেতন: <b>' + pc(bp) + '%</b></span><span><s class="d2"></s>ভাতাসমূহ: <b>' + pc(100 - bp) + '%</b></span>' +
+    '<span><s class="d3"></s>কর্তন (মোটের): <b>' + pc(dp) + '%</b></span></div></div>';
+  h += '<p class="note">বার্ষিক ভাতা (মাসিক মোটের অন্তর্ভুক্ত নয়): বাংলা নববর্ষ ভাতা = মূল বেতনের ১৫% = <b>' + tk(b * .15) + '</b></p>';
+  $('out').innerHTML = h + (extra || '');
+  const locN = ['ঢাকা উত্তর ও দক্ষিণ সিটি কর্পোরেশন', 'অন্যান্য নির্ধারিত সিটি কর্পোরেশন ও সাভার/কক্সবাজার পৌর এলাকা', 'অন্যান্য স্থান'];
+  $('psum').textContent = (mode == 'new' ? 'নতুন কর্মচারী' : 'পুরানো কর্মচারী (পে ফিক্সেশন)') + ' | লিঙ্গ: ' + (o.sex == 'f' ? 'নারী' : 'পুরুষ') +
+    ' | কর্মস্থল: ' + locN[o.loc] + ' | জিপিএফ: ' + (o.gm ? tk(o.ga) : pf(o.gp) + '%') + ' | তারিখ: ' + new Date().toLocaleDateString('bn-BD');
+}
+
+function showErr(m) { $('err').textContent = m; $('err').hidden = !m; $('out').hidden = !!m; $('dlrow').hidden = !!m; }
+
+function calcNew() {
+  const g = +$('ng').value, S = D.neu[g], i = +$('ns').value;
+  showErr('');
+  render(g, S[i], [['গ্রেড', ord(g) + ' গ্রেড'], ['বেতনস্কেল ২০২৬', range(S)], ['নির্বাচিত ধাপ', bn(i + 1) + ' / ' + bn(S.length)]]);
+}
+
+function calcOld() {
+  const g = +$('og').value, O = D.old[g], N = D.neu[g], cur = num($('cur').value);
+  if (!cur || cur < O[0]) { showErr('বর্তমান মূল বেতন কমপক্ষে ' + tk(O[0]) + ' হতে হবে (২০১৫ স্কেলে ' + ord(g) + ' গ্রেডের প্রারম্ভিক ধাপ)।'); return; }
+  showErr('');
+  let idx = 0, target = N[0], capped = false;
+  if (g > 1 && cur > O[0]) {
+    target = N[0] + cur - O[0];
+    idx = N.findIndex(v => v >= target);
+    if (idx < 0) { idx = N.length - 1; capped = true; }
+  }
+  const fixed = N[idx];
+  const canInc = $('inc').checked && idx < N.length - 1;
+  const fin = canInc ? N[idx + 1] : fixed;
+  const kv = [
+    ['২০১৫ স্কেল', ord(g) + ' গ্রেড, মূল বেতন ' + tk(cur) + (O.includes(cur) ? '' : ' (স্কেলের ধাপ নয়)')],
+    ['২০২৬ সালের গ্রেড', ord(g) + ' গ্রেড (গ্রেড নম্বর অপরিবর্তিত; অনুরূপ স্কেল ' + range(N) + ')'],
+  ];
+  if (g > 1 && cur > O[0]) {
+    kv.push(['ফিক্সেশন হিসাব', 'পার্থক্য ' + tk(cur - O[0]) + ' → ' + tk(N[0]) + ' + ' + tk(cur - O[0]) + ' = ' + tk(target)]);
+  }
+  kv.push(['ফিক্সেশনে নির্ধারিত বেতন', tk(fixed) + (capped ? ' (স্কেলের সর্বোচ্চ ধাপ)' : (g > 1 && cur > O[0] && target != fixed ? ' (পরবর্তী উচ্চতর ধাপ)' : ''))]);
+  if ($('inc').checked) kv.push(['১ জুলাই ২০২৬-এর বেতনবৃদ্ধি', canInc ? tk(fin) + ' (একটি বার্ষিক বেতনবৃদ্ধিসহ)' : 'পরবর্তী ধাপ নেই, বেতন অপরিবর্তিত']);
+  kv.push(['নতুন মূল বেতন', tk(fin)]);
+  const p = g <= 9 ? [40, 70] : [50, 75], d = fin - cur, o = opts();
+  const ph = [
+    { t: '১ জুলাই – ৩১ ডিসেম্বর ২০২৬', s: bn(p[0]) + '% বেতনবৃদ্ধি', b: cur + d * p[0] / 100 },
+    { t: '১ জানুয়ারি – ৩০ জুন ২০২৭', s: bn(p[1]) + '% বেতনবৃদ্ধি', b: cur + d * p[1] / 100 },
+    { t: '১ জুলাই ২০২৭ থেকে', s: '১০০% (পূর্ণ বেতন)', b: fin }
+  ];
+  const R = ph.map(x => rows(g, x.b, o));
+  const tot = R.map(r => r.reduce((s, x) => s + x.a, 0));
+  const DD = ph.map(x => deduct(x.b, o)), dsum = DD.map(r => r.reduce((s, x) => s + x.a, 0));
+  let ex = '<h2 style="margin-top:22px">ধাপে ধাপে ভাতাসহ মোট বেতন (অনুচ্ছেদ ১(৩))</h2><div class="sc"><table class="ph cmp"><thead><tr><th>খাত</th>' +
+    ph.map(x => '<th class="a">' + x.t + '<br><span class="sub">' + x.s + '</span></th>').join('') + '</tr></thead><tbody>';
+  R[0].forEach((x, i) => {
+    ex += '<tr class="' + (i == 0 ? 'base' : x.a ? '' : 'na') + '"><td>' + x.n + '</td>' +
+      R.map(r => '<td class="a">' + (r[i].a ? tk(r[i].a) : '—') + '</td>').join('') + '</tr>';
+  });
+  ex += '<tr class="sum"><td>মোট মাসিক বেতন</td>' + tot.map(t => '<td class="a">' + tk(t) + '</td>').join('') + '</tr>' +
+    '<tr class="dedrow"><td>মোট কর্তন<br><span class="sub">জিপিএফ, আয়কর, কল্যাণ তহবিল ও স্ট্যাম্প</span></td>' + dsum.map(t => '<td class="a">- ' + tk(t) + '</td>').join('') + '</tr>' +
+    '<tr class="netrow"><td>নীট প্রাপ্য বেতন</td>' + tot.map((t, i) => '<td class="a">' + tk(t - dsum[i]) + '</td>').join('') + '</tr></tbody></table></div>' +
+    '<p class="note">প্রতিটি ধাপে মূল বেতন ওই ধাপের অংশ অনুযায়ী ধরে বাকি ভাতা এই ক্যালকুলেটরের নিয়মে হিসাব করা হয়েছে। তবে গেজেটের অনুচ্ছেদ ১(৩)(ঞ) ও ১৫(১) অনুযায়ী বাড়ি ভাড়াসহ অন্যান্য ভাতা ৩১ ডিসেম্বর ২০২৭ পর্যন্ত ৩০ জুন ২০২৬-এর প্রাপ্য অঙ্কে চলবে এবং ১ জানুয়ারি ২০২৮ থেকে এই নতুন হারে হবে। তাই প্রথম তিন ধাপের ভাতার অঙ্ক আনুমানিক; শেষ ধাপের পূর্ণ বেতন ১ জানুয়ারি ২০২৮ থেকে পুরোপুরি কার্যকর।</p>';
+  render(g, fin, kv, ex);
+}
+
+function calc() { syncGpf(); mode == 'new' ? calcNew() : calcOld(); }
+
+function fillSteps() {
+  const g = +$('ng').value;
+  $('ns').innerHTML = D.neu[g].map((v, i) => '<option value="' + i + '">ধাপ ' + bn(i + 1) + ' – ' + tk(v) + (i ? '' : ' (প্রারম্ভিক)') + '</option>').join('');
+}
+function fillOld() {
+  const g = +$('og').value, O = D.old[g];
+  $('cs').innerHTML = O.map((v, i) => '<option value="' + v + '">ধাপ ' + bn(i + 1) + ' – ' + tk(v) + (i ? '' : ' (প্রারম্ভিক)') + '</option>').join('') +
+    '<option value="c">কাস্টম (নিজে লিখব)</option>';
+  $('cs').value = String(O[0]);
+  $('cur').value = bn(O[0]).replace(/,/g, '');
+  $('oh').textContent = '২০১৫ স্কেল: ' + range(O) + ' (' + bn(O.length) + ' ধাপ)';
+}
+function setMode(m) {
+  mode = m;
+  $('tNew').setAttribute('aria-selected', m == 'new'); $('tOld').setAttribute('aria-selected', m == 'old');
+  $('pNew').hidden = m != 'new'; $('pOld').hidden = m != 'old';
+  calc();
+}
+
+const gopts = Object.keys(D.neu).map(g => '<option value="' + g + '">' + ord(+g) + ' গ্রেড</option>').join('');
+$('ng').innerHTML = gopts; $('og').innerHTML = gopts;
+$('ng').value = '9'; $('og').value = '9';
+fillSteps(); fillOld();
+$('pdf').onclick = () => { const t = document.title; document.title = '৯ম-পে-স্কেল-বেতন-হিসাব'; window.print(); document.title = t; };
+$('tNew').onclick = () => setMode('new'); $('tOld').onclick = () => setMode('old');
+$('ng').onchange = () => { fillSteps(); calc(); };
+$('og').onchange = () => { fillOld(); calc(); };
+$('cs').onchange = () => {
+  if ($('cs').value == 'c') { $('cur').focus(); $('cur').select(); }
+  else $('cur').value = bn($('cs').value).replace(/,/g, '');
+};
+$('cur').oninput = () => {
+  const n = num($('cur').value), O = D.old[+$('og').value];
+  $('cs').value = O.includes(n) ? String(n) : 'c';
+};
+document.querySelectorAll('select,input').forEach(e => { e.addEventListener('input', calc); e.addEventListener('change', calc); });
+document.querySelectorAll('[name=loc]').forEach(e => e.addEventListener('change', () => { $('city').checked = e.value != '2'; calc(); }));
+calc();
+</script>
+</body>
+</html>
